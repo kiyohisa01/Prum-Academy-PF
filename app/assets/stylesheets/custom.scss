@@ -1,19 +1,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$hover-white: #bababa;
+$main-color: #1B5678;
+
 /* universal */
 body {
   padding-top: 120px;
   min-height: 100vh;
   width: 100%;
-  background-color: #FFFFFF; 
+  background-color: white; 
   margin: 0 auto;
 }  
   section {overflow: auto;}
   textarea {resize: none;}
-  .center {text-align: center;}
-  .center h1 {margin-bottom: 10px;}
-  
+  .center {text-align: center;
+    h1 {margin-bottom: 10px;}
+  }
   
 /* header */
 #header {
@@ -24,13 +27,13 @@ body {
     float: left;
     margin-right: 10px;
     font-size: 36px;
-    color: #FFFFFF;
+    color: white;
     // text-transform: uppercase;
     letter-spacing: -1px;
     padding: 39px 39px;
     line-height: 42px;
     font-weight: bold;
-    background-color: #1B5678;
+    background-color: $main-color;
   }
 
 #header-login-Button {
@@ -48,11 +51,8 @@ body {
   height: 53px;
   background-color: #FFFFFF;
   border-radius: 4px;
+  &:hover {background-color: $hover-white;}
 }
-
-  #header-login-Button:hover {
-  background-color: #bababa;
-  }
 
 /* footer */
 #footer {
@@ -64,7 +64,7 @@ body {
   font-size: 18px;
   color: #FFFFFF;
   padding: 0px 0px;
-  background-color: #1B5678;
+  background-color: $main-color;
   text-align:  center;
 }
 
@@ -129,7 +129,7 @@ textarea {
   height: 53px;
   padding: 16px 80px;
   margin-bottom: 38px;
-  background-color: #1B5678;
+  background-color: $main-color;
   border-radius: 4px;
 }
 
@@ -152,10 +152,9 @@ textarea {
   background-color: #0000001A;
   color: #000000BF;
   margin-bottom: 38px;
+  &:hover {background-color: $hover-white;}
 }
-  .file-input:hover {
-    background-color: #bababa;
-  }
+  
 
 .test {
   background-color: #FFFFFF;
