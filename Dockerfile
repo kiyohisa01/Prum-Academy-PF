@@ -19,3 +19,6 @@ EXPOSE 3000
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+FROM postgres:12
+RUN localedef -i ja_JP -c -f UTF-8 -A /usr/share/locale/locale.alias
