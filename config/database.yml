@@ -9,14 +9,14 @@ default: &default
 development: #開発環境
   <<: *default
   database: myapp_development
-  # host: db
+  host: db
   username: postgres
   password: password
 
 test: #テスト環境
   <<: *default
   database: myapp_test
-  # host: db
+  host: db
   username: postgres
   password: password
 

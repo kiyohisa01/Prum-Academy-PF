@@ -49,7 +49,7 @@ body {
   right: 39px;
   width: 152px;
   height: 53px;
-  background-color: #FFFFFF;
+  background-color: white;
   border-radius: 4px;
   &:hover {background-color: $hover-white;}
 }
@@ -62,14 +62,14 @@ body {
   bottom: 0;
   font-family: 'Roboto';
   font-size: 18px;
-  color: #FFFFFF;
+  color: white;
   padding: 0px 0px;
   background-color: $main-color;
   text-align:  center;
 }
 
 
-/* form */
+/* forms */
 h1 {
   font-family: "Roboto";
   font-size: 36px;
@@ -105,7 +105,7 @@ input {
   line-height: 19px;
   border: none;
   outline: none;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid black;
   width: 480px;
   padding: 8px;
   margin-bottom: 38px;
@@ -124,13 +124,17 @@ textarea {
 
 .btn {
   display: inline-block; 
-  color: #FFFFFF;
-  // width: 268px;
+  color: white;
+  width: 268px;
   height: 53px;
-  padding: 16px 80px;
+  padding: 16px 0px;
   margin-bottom: 38px;
   background-color: $main-color;
   border-radius: 4px;
+  &:hover {
+    color: white;
+    background-color: $hover-white;
+  }
 }
 
 .file-input_form {
@@ -155,6 +159,21 @@ textarea {
   &:hover {background-color: $hover-white;}
 }
 
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
 
 /* miscellaneous */
 
@@ -167,6 +186,6 @@ textarea {
   
 
 .test {
-  background-color: #FFFFFF;
+  background-color: white;
 }
 
