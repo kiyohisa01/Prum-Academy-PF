@@ -3,6 +3,7 @@
 
 <div class="form"> 
     <%= form_with(url: login_path, scope: :session) do |f| %>
+        
         <div class="input_form"> 
             <%= f.label :メールアドレス %><br>
             <%= f.email_field :email %>
