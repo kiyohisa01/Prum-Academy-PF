@@ -7,5 +7,6 @@ class User < ApplicationRecord
         uniqueness: true #重複していないか
     has_secure_password #パスワードのハッシュ化
     validates :password, presence: true, length: { minimum: 6 } #パスワードの最小文字数指定
+    has_one_attached :image
   end
   
