@@ -7,6 +7,16 @@ class User < ApplicationRecord
         uniqueness: true #重複していないか
     has_secure_password #パスワードのハッシュ化
     validates :password, presence: true, length: { minimum: 6 } #パスワードの最小文字数指定
-    has_one_attached :image
+    
+    has_one_attached :avatar #画像は1枚まで
+
+    before_create :default_avatar
+
+    def default_avatar
+      if !self.avatar.attached?
+        self.avatar.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default_user.png')), filename: 'default-image.png', content_type: 'image/png')
+      end
+    end
+
   end
   

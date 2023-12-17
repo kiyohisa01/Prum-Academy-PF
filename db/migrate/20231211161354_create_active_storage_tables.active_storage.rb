@@ -22,9 +22,10 @@ class CreateActiveStorageTables < ActiveRecord::Migration[5.2]
       t.index [ :key ], unique: true
     end
 
+    # user_id をランダムな文字列(string)にしている場合は, :record カラムのタイプをstringにしておく
     create_table :active_storage_attachments, id: primary_key_type do |t|
       t.string     :name,     null: false
-      t.references :record,   null: false, polymorphic: true, index: false, type: foreign_key_type
+      t.references :record,   null: false, polymorphic: true, index: false, type: foreign_key_type, type: :integer
       t.references :blob,     null: false, type: foreign_key_type
 
       if connection.supports_datetime_with_precision?

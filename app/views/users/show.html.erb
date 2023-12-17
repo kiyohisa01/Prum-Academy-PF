@@ -1,4 +1,37 @@
-<div>
-    <%= @user.name %>
-    <%= @user.email %>
+<div class="profile">
+  <div class="profile_form">
+
+    <div>
+        <%= @user.name %><br>
+        <%= @user.email %>
+    </div>
+
+    <div class="input_form">
+      <% if @user.avatar.attached? %>
+        <p id="avater_image"><%= image_tag(rails_blob_path(@user.avater),:size => "360x360") %></p>
+        # これは画像が登録されている場合の処理です
+      <% else %>
+        <p id="avater_image"><%= image_tag("default_user.png", :size => "360x360") %></p>
+        # これは画像が登録されていない場合の処理です
+      <% end %>
+    </div>
+
+    <div class="input_form">
+      <div id="title_introduction">
+        <h1>自己紹介</h1><br>
+      </div>
+      <%= @user.name %><br>
+        
+    </div>
+  </div>
 </div>
+
+<script>
+  function avatarImage(obj){
+      var fileReader = new FileReader();
+      fileReader.onload = (function() {
+        document.getElementById('avatar_preview').src = fileReader.result;
+      });
+      fileReader.readAsDataURL(obj.files[0]);
+  }
+</script>
