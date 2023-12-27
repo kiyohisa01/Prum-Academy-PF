@@ -1,0 +1,22 @@
+
+
+<h1><%= @engineer_role %>に項目を追加</h1>
+
+<div class="form"> 
+    <%= form_with(model: @skill) do |f| %>
+        <%= f.hidden_field :role, value: @engineer_role %>
+
+        <div class="input_form"> 
+            <%= f.label :項目名 %><br>
+            <%= f.text_field :skill %>
+        </div><br>
+
+        <div class="input_form"> 
+            <%= f.label :学習時間 %><br>
+            <%= f.number_field :learning_time, :value => 0 , class: "hours_select"%><br>
+            <label>分単位で入力してください</label><br>
+        </div><br>
+
+        <%= f.submit "追加する", class: "btn" %>
+    <% end %>
+</div>

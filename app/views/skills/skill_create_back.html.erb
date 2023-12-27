@@ -1,0 +1,36 @@
+
+<p>---テストメッセージ------</p>
+<%= current_user.name %><br>
+<%= current_user.id %><br>
+<p>
+    カテゴリー名の表示：
+    <%= @engineer_role %><br>
+</p>
+<p>
+    対象月の表示：
+    <%= @skill_month %><br>
+</p>
+<p>------------------------</p>
+
+
+<h1><%= @engineer_role %>に項目を追加</h1>
+
+<div class="form"> 
+    <%= form_with(model: @skill) do |f| %>
+        <%= f.hidden_field :engineer_role, value: @engineer_role %>
+
+        <div class="input_form"> 
+            <%= f.label :項目名 %><br>
+            <%= f.text_field :skill %>
+        </div><br>
+
+        <div class="input_form"> 
+            <%= f.label :ロール名 %><br>
+            <%= f.text_field :engineer_role %>
+        </div><br>
+
+        <%= f.submit "追加する", class: "btn" %>
+    <% end %>
+</div>
+
+

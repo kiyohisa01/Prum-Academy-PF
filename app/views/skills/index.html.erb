@@ -1,0 +1,51 @@
+
+
+<div class="category_wrapper"> 
+    <%= form_with(model: @skill) do |f| %>
+        <%= f.select :month, @two_months, { class: 'select', required: true } %><br>
+        <%= f.hidden_field :month, value: @month %>
+        
+        <div class="category_frame">
+            <div class="right">
+                <%= link_to("項目を追加する", "/skills/skill_create_back", class: "category_btn") %>
+            </div><br>
+
+            <div class="skills">
+                <div class="skill_title"><%= "項目名" %></div>
+                <div class="skill_title"><%= "学習時間" %></div>
+            </div><br>
+
+            <div class="skills">
+                <div class="skill_title"><%= "仮表示" %></div>
+                <%= f.number_field :hours, :value => 40 , class: "hours_select"%>
+                <%= f.submit "学習時間を保存する(仮表示)", class: 'save_btn' %>
+                <%= f.submit "削除する(仮表示)", method: :delete, class: 'delete_btn' %>
+            </div><br>
+
+            <ul class="skills">
+                <% @skills_back.each do |skill| %>
+                    <li>
+                        <div class="skill_title"><%= @skills.skill %></div>
+                        <%= f.number_field :hours, :value => 40 , class: "hours_select"%>
+                        <%= f.submit "学習時間を保存する", class: 'save_btn' %>
+                        <%= f.submit "削除する", method: :delete, class: 'delete_btn' %>
+                    </li>
+                <% end %>
+            </ul>
+        </div><br>
+
+        <div class="category_frame">
+            <div class="right">
+                <%= link_to("項目を追加する", "/skills/skill_create_front", class: "category_btn") %>
+            </div><br>
+        </div><br>
+
+        <div class="category_frame">
+            <div class="right">
+                <%= link_to("項目を追加する", "/skills/skill_create_infra", class: "category_btn") %>
+            </div><br>
+        </div><br>
+        
+    <% end %>
+    
+</div>

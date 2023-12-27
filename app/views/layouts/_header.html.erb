@@ -5,11 +5,12 @@
     </div>
 
     <nav> 
-      <ul
-        <li>
-            <%= link_to "ログイン",  '/', id: "header-login-Button" %>
-        </li>
-      </ul>
+      <% if logged_in? %>
+        <li><%= link_to "ログアウト", 'logout_path', class: "header-Button", method: :delete %></li>
+      <% else %>
+        <li><%= link_to "ログイン",  '/', class: "header-Button" %></li>
+      <% end %>
     </nav>
+
   </div>
 </header>
