@@ -25,7 +25,7 @@ body {
     h1 {margin-bottom: 10px;}
   }
   
-/* header */
+/* header footer */
 #header {
     position: absolute;
     width: 100%;
@@ -42,7 +42,6 @@ body {
     font-weight: bold;
     background-color: $main-color;
   }
-
 .header-Button {
   font-family: 'Roboto';
   font-size: 18px;
@@ -60,10 +59,8 @@ body {
   border-radius: 4px;
   &:hover {background-color: $hover-white;}
 }
-
-/* footer */
 #footer {
-  position: absolute;
+  position: fixed;
   display: block;
   width: 100%;
   bottom: 0;
@@ -74,7 +71,6 @@ body {
   background-color: $main-color;
   text-align:  center;
 }
-
 
 /* forms */
 h1 {
@@ -181,6 +177,128 @@ textarea {
   }
 }
 
+#title_introduction {
+  display: inline-block;
+  text-align: left;
+  margin: 240px 58px;
+  padding: 0px 0px;
+  border-bottom: 1px solid #000000;
+}
+
+select {
+  text-align: left;
+  line-height: 28.13px;
+  margin: 40px auto;
+  padding: 8px 16px;
+  border-color: #DDDDDD;
+  border-radius: 4px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.category_wrapper {
+  display: block;
+  width: 960px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+}
+
+
+/* profile page*/
+
+.profile_page {
+  width: 1440px;
+  height: 742px;
+  top: 120px;
+  padding: 80px 0px 80px 0px;
+}
+
+.profile_block {
+  display: flex;
+  width: 960px;
+  height: 360px;
+  margin: auto;
+}
+
+.introduce_block {
+  width: 520px;
+  margin-left: 80px;
+}
+
+.title_introduce {
+  border-bottom: 2px solid #00000080;
+  width: 240px;
+  height: 58px;
+}
+
+.title_introduce h1 {
+  text-align: left;
+  font-weight: 700;
+  margin: 58px 0px;
+}
+
+.text_introduce {
+  text-align: left;
+  width: 520px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  margin: 32px 0;
+  color: #000000BF;
+}
+
+.introduce_edit_btn {
+  display: block;
+  text-align: center;
+  line-height: 48px;
+  color: white;
+  width: 242px;
+  height: 53px;
+  padding: 2px 0px;
+  font-size: 18px;
+  background-color: $main-color;
+  border-radius: 4px;
+  border-bottom: 0;
+  &:hover {
+    color: white;
+    background-color: $hover-white;
+  }
+}
+
+
+#avater_image {
+  //width: 360px;
+  //height:360px;
+  border-radius:50%;
+  background-position: center;
+}
+#avater_name {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.profile_content {
+  display: block;
+  width: 520px;
+  height: 256px;
+  margin-top: 52px;
+  margin-left: 440px;
+}
+
 .profile {
   display: block;
   margin:  auto 0;
@@ -196,25 +314,107 @@ textarea {
   height:582px;
 }
 
-#title_introduction {
-  display: inline-block;
-  text-align: left;
-  margin: 240px 58px;
-  padding: 0px 0px;
-  border-bottom: 1px solid #000000;
+.chart_title_block {
+  width: 400px;
+  height: 151px;
+  margin: auto;
+  margin-top: 130px;
 }
 
-select {
-  text-align: left;
-  line-height: 28.13px;
-  margin-top: 40px;
-  padding: 8px 16px;
-  border-color: #DDDDDD;
+.title_chart {
+  border-bottom: 2px solid #00000080;
+  width: 400px;
+  height: 58px;
+}
+
+.title_chart h1 {
+  text-align: center;
+  font-weight: 700;
+  margin: 58px 0px;
+}
+
+.chart_edit_btn {
+  display: block;
+  text-align: center;
+  line-height: 48px;
+  color: white;
+  width: 152px;
+  height: 53px;
+  padding: 2px 0px;
+  font-size: 18px;
+  background-color: $main-color;
   border-radius: 4px;
+  border-bottom: 0;
+  margin: auto;
+  margin-top: 40px;
+  &:hover {
+    color: white;
+    background-color: $hover-white;
+  }
+}
+
+
+/* skill page*/
+.category_frame {
+  border: 1px solid #00000080;
+  border-radius: 8px;
+  padding: 40px;
+}
+.roll_title {
+  text-align: left;
+  width: 240px;
   font-size: 24px;
   font-weight: 700;
+  border-bottom: 1px solid #000000BF;
 }
-
+.skill_name {
+  display: inline-block; 
+  width: 240px;
+  height: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.15px;
+  padding-left: 40px;
+}
+.study_time {
+  display: inline-block; 
+  width: 240px;
+  height: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.15px;
+}
+.skill_form {
+  //border: 1px solid #000000;
+  border-radius: 8px;
+  box-shadow: 0px 1px 5px 0px #0000001F, 0px 2px 2px 0px #00000024, 0px 3px 1px -2px #00000033;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+.table {width: 100%;
+border: 1px solid #000000;}
+.table_header {display: table-row;
+  height: 57px;}
+.table_header_cell {display: table-cell;
+  line-height: 57px;
+  font-weight: 500;}
+.table_row {//display: table-row;
+  height: 73px;
+  border-top: 1px solid #E0E0E0;}
+.table_cell {display: table-cell;}
+.skill_add_btn {
+  display: block;
+  margin: 0 0 0 auto;
+  text-align: center;
+  line-height: 48px;
+  color: white;
+  width: 178px;
+  height: 48px;
+  font-size: 14px;
+  background-color: $main-color;
+  border-radius: 4px;
+  border-bottom: 0;
+}
 .hours_select {
   width: 160px;
   height: 40px;
@@ -222,46 +422,9 @@ select {
   border-radius: 4px;
   color: #0000008A;
   line-height: 19px;
+  margin-bottom: 0px;
+  margin: 16px 0px;
 }
-
-.skill_title {
-  display: inline-block; 
-  width: 184px;
-  height: 20px;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.15px;
-}
-
-.category_wrapper {
-  display: block;
-  width: 960px;
-  margin: 0 auto;
-}
-
-.category_frame {
-  border: 1px solid #00000080;
-  border-radius: 8px;
-  padding: 40px;
-
-}
-
-.category_title {
-  margin-bottom: 38px;
-}
-
-.category_btn {
-  display: inline-block; 
-  color: white;
-  width: 178px;
-  height: 48px;
-  font-size: 14px;
-  line-height: 16.4px;
-  background-color: $main-color;
-  border-radius: 4px;
-  border-bottom: 0;
-}
-
 .save_btn {
   display: inline-block; 
   color: $main-color;
@@ -273,10 +436,9 @@ select {
   border: 1px solid $main-color;
   border-radius: 4px;
   border-color: $main-color;
+  margin-bottom: 0px;
 }
-
 .delete_btn {
-  display: inline-block; 
   color: white;
   width: 88px;
   height: 32px;
@@ -285,38 +447,31 @@ select {
   background-color: #EE6969;
   border-radius: 4px;
   border-bottom: 0;
+  margin-bottom: 0px;
+  margin-left: 25px;
 }
 
 
-/* image */
-#avater_image {
-  width: 100px;
-  height:100px;
-  border-radius:50%;
-  background-position: center;
-  //object-fit: cover;
-  //padding: 360px 360px;
-}
-
-
-/* miscellaneous */
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-}
 
 
 /*basic operation*/
-.right{
-	text-align: right;
-}
+.test {background-color: white;}
 
-  
+/*block*/
+.block {display: block;}
+.inline {display: inline;}
+.inline_block {display: inline-block;}
+.flex {display: flex;}
 
-.test {
-  background-color: white;
-}
+/*align*/
+.center {text-align:  center;}
+.right {text-align:  right;}
+.left {text-align:  left;}
+
+/*width*/
+.width240 {width: 240px;}
+.width200  {width: 200px;}
+
+/*tool*/
+.hidden {text-indent: -9999px;} //見えないけど読み上げツールで反応させたいとき
 

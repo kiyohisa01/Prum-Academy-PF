@@ -1,5 +1,12 @@
 <footer class="footer">
   <div class="container", id="footer">
-    portfolio site
+    <nav> 
+      <% if logged_in? %>
+        <%= current_user.name %><br>
+      <% else %>
+        portfolio site
+      <% end %>
+    </nav>
+    
   </div>
 </footer>

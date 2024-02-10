@@ -4,44 +4,215 @@ class SkillsController < ApplicationController
     end
 
     def index
-        # ▼　条件別のデータ一覧取得
-        @skills_back = Skill.where(engineer_role: "バックエンド")
-        @skills_front = Skill.where(engineer_role: "フロントエンド")
-        @skills_infra = Skill.where(engineer_role: "インフラ")
-
         # ▼　今月の整数を取得
         @this_month= Date.today.month
+        @this_year= Date.today.year
         # ▼　先月の整数を取得
         @last_month= if @this_month == 1
                 12
             else
                 @this_month - 1
             end
+        @last_month_year = if @this_month == 1
+                @this_year - 1
+            else
+                @this_year
+            end
         # ▼　先々月の整数を取得
-        @two_month= if @last_month == 1
+        @two_month= if @this_month == 1
+                11
+            elsif @this_month == 2
                 12
             else
                 @last_month - 1
             end
+        @two_month_year= if @last_month == 1
+                @this_year - 1
+            elsif @last_month == 2
+                @this_year - 1
+            else
+                @this_year
+            end
+         
+        
+        # ▼　今月のデータ一覧
+        @this_month_role_back = Learning.where(engineer_role: "バックエンド").where(user_id: current_user.id).where(month: Date.today.month).where(year: Date.today.year)
+        @this_month_role_front = Learning.where(engineer_role: "フロントエンド").where(user_id: current_user.id).where(month: Date.today.month).where(year: Date.today.year)
+        @this_month_role_infra = Learning.where(engineer_role: "インフラ").where(user_id: current_user.id).where(month: Date.today.month).where(year: Date.today.year)
+        # ▼　先月のデータ一覧
+        @last_month_role_back = Learning.where(engineer_role: "バックエンド").where(user_id: current_user.id).where(month: @last_month).where(year: @last_month_year)
+        @last_month_role_front = Learning.where(engineer_role: "フロントエンド").where(user_id: current_user.id).where(month: @last_month).where(year: @last_month_year)
+        @last_month_role_infra = Learning.where(engineer_role: "インフラ").where(user_id: current_user.id).where(month: @last_month).where(year: @last_month_year)
+        # ▼　先々月のデータ一覧
+        @two_month_role_back = Learning.where(engineer_role: "バックエンド").where(user_id: current_user.id).where(month: @two_month).where(year: @two_month_year)
+        @two_month_role_front = Learning.where(engineer_role: "フロントエンド").where(user_id: current_user.id).where(month: @two_month).where(year: @two_month_year)
+        @two_month_role_infra = Learning.where(engineer_role: "インフラ").where(user_id: current_user.id).where(month: @two_month).where(year: @two_month_year)
         # ▼　プルダウンに表示する配列を作成
-        @two_months =  [@this_month, @last_month, @two_month]
+        @this_month_word = "#{@this_month}月"
+        @last_month_word = "#{@last_month}月"
+        @two_month_word = "#{@two_month}月"
+        @two_months =  [[@this_month_word,1], [@last_month_word,2], [@two_month_word,3]]
     end
 
-    def skill_create_back
-        @month = params[:month]
+    def skill_create_back_this_month
+        @learning = Learning.new
+        @month = Date.today.month
+        @year = Date.today.year
         @engineer_role = "バックエンド"
     end
-    def skill_create_front
+
+    def skill_create_back_last_month
+        @learning = Learning.new
+        @this_month= Date.today.month
+        @month = if @this_month == 1
+                12
+            else
+                @this_month - 1
+            end
+        @this_year= Date.today.year
+        @year = if @this_month == 1
+                @this_year - 1
+            else
+                @this_year
+            end
+        @engineer_role = "バックエンド"
+    end
+
+    def skill_create_back_two_month
+        @learning = Learning.all
+        @this_month = Date.today.month
+        @last_month = if @this_month == 1
+                12
+            else
+                @this_month - 1
+            end
+        @month = if @last_month == 1
+                11
+            elsif @last_month == 2
+                12
+            else
+                @last_month - 1
+            end
+        @this_year= Date.today.year
+        @year= if @last_month == 1
+                @this_year - 1
+            elsif @last_month == 2
+                @this_year - 1
+            else
+                @this_year
+            end
+        @engineer_role = "バックエンド"
+    end
+
+    def skill_create_front_this_month
+        @learning = Learning.new
+        @month = Date.today.month
+        @year = Date.today.year
         @engineer_role = "フロントエンド"
     end
-    def skill_create_infra
+
+    def skill_create_front_last_month
+        @learning = Learning.new
+        @this_month= Date.today.month
+        @month = if @this_month == 1
+                12
+            else
+                @this_month - 1
+            end
+        @this_year= Date.today.year
+        @year = if @this_month == 1
+                @this_year - 1
+            else
+                @this_year
+            end
+        @engineer_role = "フロントエンド"
+    end
+
+    def skill_create_front_two_month
+        @learning = Learning.new
+        @this_month = Date.today.month
+        @last_month = if @this_month == 1
+                12
+            else
+                @this_month - 1
+            end
+        @month = if @last_month == 1
+                11
+            elsif @last_month == 2
+                12
+            else
+                @last_month - 1
+            end
+        @this_year= Date.today.year
+        @year= if @last_month == 1
+                @this_year - 1
+            elsif @last_month == 2
+                @this_year - 1
+            else
+                @this_year
+            end
+        @engineer_role = "フロントエンド"
+    end
+
+    def skill_create_infra_this_month
+        @learning = Learning.new
+        @month = Date.today.month
+        @year = Date.today.year
+        @engineer_role = "インフラ"
+    end
+
+    def skill_create_infra_last_month
+        @learning = Learning.new
+        @this_month= Date.today.month
+        @month = if @this_month == 1
+                12
+            else
+                @this_month - 1
+            end
+        @this_year= Date.today.year
+        @year = if @this_month == 1
+                @this_year - 1
+            else
+                @this_year
+            end
+        @engineer_role = "インフラ"
+    end
+
+    def skill_create_infra_two_month
+        @learning = Learning.new
+        @this_month = Date.today.month
+        @last_month = if @this_month == 1
+                12
+            else
+                @this_month - 1
+            end
+        @month = if @last_month == 1
+                11
+            elsif @last_month == 2
+                12
+            else
+                @last_month - 1
+            end
+        @this_year= Date.today.year
+        @year= if @last_month == 1
+                @this_year - 1
+            elsif @last_month == 2
+                @this_year - 1
+            else
+                @this_year
+            end
         @engineer_role = "インフラ"
     end
 
     def create
-        @skill = Skill.new(skill_params)
-        @skill.save
-        redirect_to "/skills"
+        @learning = Learning.new(learning_params)
+        if @learning.save
+            flash[:notice] = "保存に成功しました"
+            redirect_to "/skills"
+        else
+            flash[:alert] = "保存に失敗しました"
+            render :new
+        end
     end
 
     def show
@@ -49,22 +220,24 @@ class SkillsController < ApplicationController
 
     def skill
         @skill = Skill.find(params[:id])
-      end
+    end
     
-      def update
+    def update
         @skill = Skill.find(params[:id])
-        redirect_to skills_url
-      end
-
-    def destroy
-        skill = Skill.find(params[:id]).destroy
-        skill.destroy
         redirect_to skills_url
     end
 
+    def destroy
+        skill = Learning.find(params[:id])
+        if skill.user_id == current_user.id
+            skill.destroy
+            flash[:notice] = "削除しました"
+        end
+    end
+
     private
-    def skill_params
-      params.require(:skill).permit(:skill, :engineer_role)
+    def learning_params
+      params.require(:learning).permit(:learning_time, :month, :year, :engineer_role, :skill)
     end
         
 end

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :skills, dependent: :destroy #関連付け, ユーザ削除時に関連データも削除
+  # has_many :skills, dependent: :destroy #関連付け, ユーザ削除時に関連データも削除
   has_many :learnings, dependent: :destroy
 
   before_save { self.email = email.downcase } #保存前に小文字に変換
