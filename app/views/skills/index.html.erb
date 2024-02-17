@@ -1,10 +1,13 @@
-
+<div id="mask" class="hidden"></div>
+<div id="modal" class="hidden">
+    <p>モーダルウィンドウ<p>
+</div>
 
 <div class="category_wrapper">
     <%= form_with(model: @skill) do |f| %>
         <%= f.select :month, @two_months, { class: 'select' , required: true, id: "input"}%><br>
 
-        <div id="A今月"  class="category_frame">
+        <div id="B今月"  class="category_frame">
             <div class="right flex">
                 <div class="roll_title">今月のバックエンド</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_back_this_month", class: "skill_add_btn") %>
@@ -47,7 +50,7 @@
             </div><br>
         </div><br>
 
-        <div id="C先々月" class="category_frame" style = 'display:none'>,
+        <div id="B先々月" class="category_frame" style = 'display:none'>,
             <div class="right flex">
                 <div class="roll_title">先々月のバックエンド</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_back_two_month", class: "skill_add_btn") %>
@@ -68,7 +71,7 @@
             </div><br>
         </div><br>
 
-        <div id="A今月"  class="category_frame">
+        <div id="F今月"  class="category_frame">
             <div class="right flex">
                 <div class="roll_title">今月のフロントエンド</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_front_this_month", class: "skill_add_btn") %>
@@ -90,7 +93,7 @@
             </div><br>
         </div><br>
 
-        <div id="B先月"  class="category_frame" style = 'display:none'>
+        <div id="F先月"  class="category_frame" style = 'display:none'>
             <div class="right flex">
                 <div class="roll_title">先月のフロントエンド</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_front_last_month", class: "skill_add_btn") %>
@@ -111,7 +114,7 @@
             </div><br>
         </div><br>
 
-        <div id="C先々月" class="category_frame" style = 'display:none'>,
+        <div id="F先々月" class="category_frame" style = 'display:none'>,
             <div class="right flex">
                 <div class="roll_title">先々月のフロントエンド</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_front_two_month", class: "skill_add_btn") %>
@@ -132,7 +135,7 @@
             </div><br>
         </div><br>
 
-        <div id="A今月"  class="category_frame">
+        <div id="I今月"  class="category_frame">
             <div class="right flex">
                 <div class="roll_title">今月のインフラ</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_infra_this_month", class: "skill_add_btn") %>
@@ -154,7 +157,7 @@
             </div><br>
         </div><br>
 
-        <div id="B先月"  class="category_frame" style = 'display:none'>
+        <div id="I先月"  class="category_frame" style = 'display:none'>
             <div class="right flex">
                 <div class="roll_title">先月のインフラ</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_infra_last_month", class: "skill_add_btn") %>
@@ -175,7 +178,7 @@
             </div><br>
         </div><br>
 
-        <div id="C先々月" class="category_frame" style = 'display:none'>,
+        <div id="I先々月" class="category_frame" style = 'display:none'>,
             <div class="right flex">
                 <div class="roll_title">先々月のインフラ</div>
                 <%= link_to("項目を追加する", "/skills/skill_create_infra_two_month", class: "skill_add_btn") %>
@@ -200,4 +203,5 @@
 
 
 
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js">
+</script>

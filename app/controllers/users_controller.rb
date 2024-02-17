@@ -25,7 +25,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    redirect_to @user
+    @user.avatar.attach(params[:user][:avatar]) if @user.avatar.blank?
+    if @user.update(user_params)
+      redirect_to user_path
+    else
+      flash[:alert] = "保存に失敗しました"
+      render "edit"
+    end
   end
 
   def show
@@ -59,8 +65,7 @@ class UsersController < ApplicationController
         @this_year
       end
     
-    # 今月の各ロールの学習時間合計（jsに渡す変数）
-    
+      # 今月の各ロールの学習時間合計（jsに渡す変数）
     @this_month_learnings_back_sum = Learning.where(user_id: current_user.id, month: @this_month, year: @this_year, engineer_role: "バックエンド").pluck(:learning_time).sum
     @this_month_learnings_front_sum = Learning.where(user_id: current_user.id, month: @this_month, year: @this_year, engineer_role: "フロントエンド").pluck(:learning_time).sum
     @this_month_learnings_infra_sum = Learning.where(user_id: current_user.id, month: @this_month, year: @this_year, engineer_role: "インフラ").pluck(:learning_time).sum
@@ -107,7 +112,8 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :avatar, :password)
+      params.require(:user).permit(:name, :email, :avatar, :password, :introduce)
     end
-
+    
 end
+

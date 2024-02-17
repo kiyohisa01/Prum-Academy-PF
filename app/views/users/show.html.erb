@@ -3,15 +3,19 @@
   <div class="profile_block">
     <div>
 
-      <% if @user.avatar.attached? %>
-        <div id="avater_image">
-          <%= image_tag(rails_blob_path(@user.avater),:size => "360x360") %>
-        </div>
-      <% else %>
-        <div id="avater_image"><%= image_tag("default_user.png", :size => "360x360", :style => "border-radius: 50%") %></div>
+      <% @user.each do |i| %>
+        <% if user.i.attached? %>
+          <div id="avatar_image">
+            <%= image_tag i, :size => "360x360", :style => "border-radius: 50%" %>
+          </div>
+        <% else %>
+          <div id="avatar_image">
+            <%= image_tag("default_user.png", :size => "360x360", :style => "border-radius: 50%") %>
+          </div>
+        <% end %>
       <% end %>
 
-      <div id="avater_name">
+      <div id="avatar_name">
         <%= @user.name %><br>
       </div>
 
@@ -22,10 +26,12 @@
         <h1>自己紹介</h1><br>
       </div>
       <div class="text_introduce">
+        <%= @user.introduce %><br>
         <p>自分の自己紹介文が入ります。自分の自己紹介文が入ります。自分の自己紹介文が入ります。自分の自己紹介文が入ります。自分の自己紹介文が入ります。</P>
       </div>
       <%= link_to("自己紹介を編集する", edit_user_path(current_user), class: "introduce_edit_btn") %>
     </div>
+
   </div>
 
   <div class="chart_title_block">
@@ -34,107 +40,107 @@
     </div>
     <a href="/skills" class="chart_edit_btn">編集する</a>
   </div>
+
 </div>
 
 <br>
 
 <div style="position:relative;width:1081px;height:532px;">
-
-<canvas id="myChart"></canvas>
+  <canvas id="myChart"></canvas>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </div>
 
 <script>
-var this_month_learnings_back_sum = gon.this_month_learnings_back_sum;
-var this_month_learnings_front_sum = gon.this_month_learnings_front_sum;
-var this_month_learnings_infra_sum = gon.this_month_learnings_infra_sum;
+  var this_month_learnings_back_sum = gon.this_month_learnings_back_sum;
+  var this_month_learnings_front_sum = gon.this_month_learnings_front_sum;
+  var this_month_learnings_infra_sum = gon.this_month_learnings_infra_sum;
 
-var last_month_learnings_back_sum = gon.last_month_learnings_back_sum;
-var last_month_learnings_front_sum = gon.last_month_learnings_front_sum;
-var last_month_learnings_infra_sum = gon.last_month_learnings_infra_sum;
+  var last_month_learnings_back_sum = gon.last_month_learnings_back_sum;
+  var last_month_learnings_front_sum = gon.last_month_learnings_front_sum;
+  var last_month_learnings_infra_sum = gon.last_month_learnings_infra_sum;
 
-var two_month_learnings_back_sum = gon.two_month_learnings_back_sum;
-var two_month_learnings_front_sum = gon.two_month_learnings_front_sum;
-var two_month_learnings_infra_sum = gon.two_month_learnings_infra_sum;
+  var two_month_learnings_back_sum = gon.two_month_learnings_back_sum;
+  var two_month_learnings_front_sum = gon.two_month_learnings_front_sum;
+  var two_month_learnings_infra_sum = gon.two_month_learnings_infra_sum;
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {type: 'bar',
-  data: {
-    labels: ['今月', '先月', '先々月'],
-    datasets: [
-      {
-        label: 'バックエンド',
-        data: [this_month_learnings_back_sum, last_month_learnings_back_sum, two_month_learnings_back_sum],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(255, 159, 64, 0.5)',
-            'rgba(255, 206, 86, 0.5)'
-        ],
-        borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 159, 64, 1)',
-            'rgba(255, 206, 86, 1)'
-        ],
-        borderWidth: 1
-      },{
-        label: 'フロントエンド',
-        data: [this_month_learnings_front_sum, last_month_learnings_front_sum, two_month_learnings_front_sum],
-        backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      },{
-        label: 'インフラ',
-        data: [this_month_learnings_infra_sum, last_month_learnings_infra_sum, two_month_learnings_infra_sum],
-        backgroundColor: [
-            'rgba(255, 139, 90, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-            'rgba(255, 139, 90, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart'
-    },
-    scales: {
-      yAxes: [{
-        ticks:{
-          suggestedMin: 100,
-          stepSize: 20,
-          callback: function(value, index, values){
-            return value
-          }
+  var ctx = document.getElementById('myChart');
+  var myChart = new Chart(ctx, {type: 'bar',
+    data: {
+      labels: ['今月', '先月', '先々月'],
+      datasets: [
+        {
+          label: 'バックエンド',
+          data: [this_month_learnings_back_sum, last_month_learnings_back_sum, two_month_learnings_back_sum],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.5)',
+              'rgba(255, 159, 64, 0.5)',
+              'rgba(255, 206, 86, 0.5)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(255, 206, 86, 1)'
+          ],
+          borderWidth: 1
+        },{
+          label: 'フロントエンド',
+          data: [this_month_learnings_front_sum, last_month_learnings_front_sum, two_month_learnings_front_sum],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        },{
+          label: 'インフラ',
+          data: [this_month_learnings_infra_sum, last_month_learnings_infra_sum, two_month_learnings_infra_sum],
+          backgroundColor: [
+              'rgba(255, 139, 90, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 139, 90, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
         }
-      }]
+      ]
     },
-  }
-});
+    options: {
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      },
+      scales: {
+        yAxes: [{
+          ticks:{
+            suggestedMin: 100,
+            stepSize: 20,
+            callback: function(value, index, values){
+              return value
+            }
+          }
+        }]
+      },
+    }
+  });
 </script>

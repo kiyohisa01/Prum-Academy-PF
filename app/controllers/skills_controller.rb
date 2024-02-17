@@ -1,6 +1,22 @@
 class SkillsController < ApplicationController
 
     def new
+        @learning = Learning.new
+    end
+
+    def create
+        @learning = Learning.new(learning_params)
+        if @learning.save
+            flash[:notice] = "保存に成功しました"
+            redirect_to "skills/index"
+        else
+            flash[:alert] = "保存に失敗しました"
+            redirect_to @learning
+        end
+    end
+
+    def show
+        @skill = Learning.find(params[:id])
     end
 
     def index
@@ -62,7 +78,7 @@ class SkillsController < ApplicationController
     end
 
     def skill_create_back_last_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @this_month= Date.today.month
         @month = if @this_month == 1
                 12
@@ -79,7 +95,7 @@ class SkillsController < ApplicationController
     end
 
     def skill_create_back_two_month
-        @learning = Learning.all
+        @learning = Learning.find(learning_params)
         @this_month = Date.today.month
         @last_month = if @this_month == 1
                 12
@@ -105,14 +121,14 @@ class SkillsController < ApplicationController
     end
 
     def skill_create_front_this_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @month = Date.today.month
         @year = Date.today.year
         @engineer_role = "フロントエンド"
     end
 
     def skill_create_front_last_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @this_month= Date.today.month
         @month = if @this_month == 1
                 12
@@ -129,7 +145,7 @@ class SkillsController < ApplicationController
     end
 
     def skill_create_front_two_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @this_month = Date.today.month
         @last_month = if @this_month == 1
                 12
@@ -155,14 +171,14 @@ class SkillsController < ApplicationController
     end
 
     def skill_create_infra_this_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @month = Date.today.month
         @year = Date.today.year
         @engineer_role = "インフラ"
     end
 
     def skill_create_infra_last_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @this_month= Date.today.month
         @month = if @this_month == 1
                 12
@@ -179,7 +195,7 @@ class SkillsController < ApplicationController
     end
 
     def skill_create_infra_two_month
-        @learning = Learning.new
+        @learning = Learning.find(learning_params)
         @this_month = Date.today.month
         @last_month = if @this_month == 1
                 12
@@ -204,27 +220,18 @@ class SkillsController < ApplicationController
         @engineer_role = "インフラ"
     end
 
-    def create
-        @learning = Learning.new(learning_params)
-        if @learning.save
-            flash[:notice] = "保存に成功しました"
-            redirect_to "/skills"
+    def edit
+        @skill = Learning.find(params[:id])
+    end
+
+    def update
+        @skill = Learning.find(params[:id])
+        if @skill.update(skill_params)
+            redirect_to skills_url
         else
             flash[:alert] = "保存に失敗しました"
             render :new
         end
-    end
-
-    def show
-    end
-
-    def skill
-        @skill = Skill.find(params[:id])
-    end
-    
-    def update
-        @skill = Skill.find(params[:id])
-        redirect_to skills_url
     end
 
     def destroy
@@ -232,12 +239,16 @@ class SkillsController < ApplicationController
         if skill.user_id == current_user.id
             skill.destroy
             flash[:notice] = "削除しました"
+            redirect_to skill_path
+        else
+            flash.now[:danger] = "削除に失敗しました"
+            render 'index'
         end
     end
 
     private
     def learning_params
-      params.require(:learning).permit(:learning_time, :month, :year, :engineer_role, :skill)
+      params.require(:learning).permit(:learning_time, :user_id, :month, :year, :engineer_role, :skill)
     end
         
 end
