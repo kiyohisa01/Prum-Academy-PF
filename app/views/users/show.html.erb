@@ -2,14 +2,13 @@
 <div class="profile_page">
   <div class="profile_block">
     <div>
-
-      <% @user.each do |i| %>
-        <% if user.i.attached? %>
+      <%= form_for @user do |i| %>
+        <% if @user.avatar.attached? %>
           <div id="avatar_image">
             <%= image_tag i, :size => "360x360", :style => "border-radius: 50%" %>
           </div>
         <% else %>
-          <div id="avatar_image">
+          <div id="avatar_image_nil">
             <%= image_tag("default_user.png", :size => "360x360", :style => "border-radius: 50%") %>
           </div>
         <% end %>

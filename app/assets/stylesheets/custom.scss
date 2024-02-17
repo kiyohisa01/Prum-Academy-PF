@@ -463,7 +463,35 @@ border: 1px solid #000000;}
   z-index: 1; /*z-index を持つ要素はより小さな要素の上に重なる*/
 }
 
-#modal {
+#modal_save {
+  position: fixed;/* スクロールで移動しないようmodalの位置を固定 */
+  top: 20vh; /*上端からの距離の指定、今回は画面上から２０％の位置から配置*/
+  left: 0; /*左からの距離の指定*/
+  right: 0; /*右からの距離の指定*/
+  margin: 0 auto; /*上２つと合わせ中央に配置される*/
+  transform: translate(0, 0) scale(1); /*平行移動（translate）、拡大縮小（scale）の指定*/
+  transition: 0.2s; /*上記trancsformに要する時間、今回は0.2秒*/
+  z-index: 2; /*z-index を持つ要素はより小さな要素の上に重なる*/
+  width: 50vw; /*モーダルの幅の指定、今回はvwを用いて画面の50%幅でモーダルを作成*/
+  background-color: white; /*背景色*/
+  border-radius: 8px; /*角の処理、指定することで丸みを帯びる*/
+}
+
+#modal_destroy {
+  position: fixed;/* スクロールで移動しないようmodalの位置を固定 */
+  top: 20vh; /*上端からの距離の指定、今回は画面上から２０％の位置から配置*/
+  left: 0; /*左からの距離の指定*/
+  right: 0; /*右からの距離の指定*/
+  margin: 0 auto; /*上２つと合わせ中央に配置される*/
+  transform: translate(0, 0) scale(1); /*平行移動（translate）、拡大縮小（scale）の指定*/
+  transition: 0.2s; /*上記trancsformに要する時間、今回は0.2秒*/
+  z-index: 2; /*z-index を持つ要素はより小さな要素の上に重なる*/
+  width: 50vw; /*モーダルの幅の指定、今回はvwを用いて画面の50%幅でモーダルを作成*/
+  background-color: white; /*背景色*/
+  border-radius: 8px; /*角の処理、指定することで丸みを帯びる*/
+}
+
+#easyModal {
   position: fixed;/* スクロールで移動しないようmodalの位置を固定 */
   top: 20vh; /*上端からの距離の指定、今回は画面上から２０％の位置から配置*/
   left: 0; /*左からの距離の指定*/
@@ -488,7 +516,14 @@ border: 1px solid #000000;}
   transform: translate(0, 0) scale(0.8); /* 大きさ0.8倍から等倍にモーダルが拡大される */
 }
 
-
+.modal-content {
+  background-color: #f4f4f4;
+  margin: 20% auto;
+  width: 50%;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
 
 
 
