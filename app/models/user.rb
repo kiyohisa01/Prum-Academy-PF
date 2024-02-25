@@ -15,7 +15,10 @@ class User < ApplicationRecord
     presence: true, #空でない
     length: { minimum: 8 } #最小文字数指定
     
+  # ActiveStorageとUserを紐付け
   has_one_attached :avatar #画像は1枚まで
+
+  # バリデーション
   validate :image_content_type
   validate :image_size
 
@@ -28,8 +31,9 @@ class User < ApplicationRecord
   end
 
   def image_content_type
-    if avatar.attached? && !avatar.content_type.in?(%w[avatar/jpeg avatar/png avatar/gif])
-      error.add(:avatar, ':ファイル形式が、JPEG、PNG、GIF以外になっています。ファイル形式をご確認ください。')
+    validates_attachment :image, :content_type => { :content_type => ["application/octet-stream","image/jpg","image/jpeg","image/png"] }
+    if avatar.attached? && !avatar.content_type.in?(%("image/jpeg image/jpg image/png"))
+      errors.add(:avatar, ':ファイル形式が、JPEG、PNG、GIF以外になっています。ファイル形式をご確認ください。')
     end
   end
 
@@ -40,4 +44,4 @@ class User < ApplicationRecord
   end
 
 end
-  
+

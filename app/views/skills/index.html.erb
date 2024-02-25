@@ -1,16 +1,23 @@
-<div id="mask" class="hidden"></div>
-<div id="modal_save" class="hidden">
-    <div class="modal-content">
-        <p><%= @skill %>の学習時間を保存しました！</p>
-        <%= link_to("編集ページに戻る", "/skill", class: "btn") %>
-    </div>
-</div>
-<div id="modal_destroy" class="hidden">
-    <div class="modal-content">
-        <p><%= @skill %>を削除しました！</p>
-        <%= link_to("編集ページに戻る", "/skill", class: "btn") %>
-    </div>
-</div>
+<% if flash[:notice].present? %>
+    <script>
+        window.onload = function() {
+        $('#MODAL').modal('show');
+        }
+    </script>
+    <div class="modal fade" id="MODAL">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>削除しました！</p>
+                    </div>
+                    <div class="modal-footer">
+                        <%= link_to("編集ページに戻る", "/skill", class: "btn") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+<% end %>
 
 <div class="category_wrapper">
     <%= form_with(model: @skill) do |f| %>

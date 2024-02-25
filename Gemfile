@@ -51,7 +51,6 @@ gem "image_processing", "~> 1.2"
 gem "active_storage_validations"
 gem "mini_magick"
 
-
 gem 'gon'
 
 

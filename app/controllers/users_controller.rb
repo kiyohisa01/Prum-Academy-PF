@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
   end
 
@@ -25,7 +26,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.avatar.attach(params[:user][:avatar]) if @user.avatar.blank?
     if @user.update(user_params)
       redirect_to user_path
     else

@@ -1,4 +1,11 @@
 class SkillsController < ApplicationController
+    before_action :set_admin
+
+    def set_admin
+      @modal = ""
+      @delete_skill = ""
+      @update_skill = ""
+    end
 
     def new
         @learning = Learning.new
@@ -227,6 +234,8 @@ class SkillsController < ApplicationController
     def update
         @skill = Learning.find(params[:id])
         if @skill.update(skill_params)
+            @modal = "update"
+            @update_skill = @skill.skill
             redirect_to skills_url
         else
             flash[:alert] = "保存に失敗しました"
@@ -237,6 +246,7 @@ class SkillsController < ApplicationController
     def destroy
         skill = Learning.find(params[:id])
         if skill.user_id == current_user.id
+            @Deleted_skill = skill.skill
             skill.destroy
             flash[:notice] = "削除しました"
             redirect_to skill_path
