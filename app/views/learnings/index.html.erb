@@ -1,0 +1,225 @@
+<% if flash[:notice].present? %>
+    <script>
+        window.onload = function() {
+        $('#MODAL').modal('show');
+        }
+    </script>
+    <div class="modal fade" id="MODAL">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <% if @modal == "delete" %>
+                            <p><% @delete_skill %>を削除しました！</p>
+                        <% elsif @model == "update" %>
+                            <p><% @update_skill %>の学習時間を保存しました！</p>
+                        <% end %>
+                        <%= link_to("編集ページに戻る", "/learning", class: "btn") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+<% end %>
+
+
+<div class="category_wrapper">
+    <%= form_with(model: Learning) do |f| %>
+        <%= f.select :month, @two_months, { class: 'select' , required: true, id: "input"}%><br>
+
+        <div id="B今月"  class="category_frame">
+            <div class="right flex">
+                <div class="roll_title">今月のバックエンド</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_back_this_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @this_month_role_back.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="B先月"  class="category_frame" style = 'display:none'>
+            <div class="right flex">
+                <div class="roll_title">先月のバックエンド</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_back_last_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @last_month_role_back.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="B先々月" class="category_frame" style = 'display:none'>,
+            <div class="right flex">
+                <div class="roll_title">先々月のバックエンド</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_back_two_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @two_month_role_back.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="F今月"  class="category_frame">
+            <div class="right flex">
+                <div class="roll_title">今月のフロントエンド</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_front_this_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @this_month_role_front.each do |t| %>
+                    <div class="table_row">
+                        <%= t.hidden_field :skill_name, value: t.skill %>
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="F先月"  class="category_frame" style = 'display:none'>
+            <div class="right flex">
+                <div class="roll_title">先月のフロントエンド</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_front_last_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @last_month_role_front.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="F先々月" class="category_frame" style = 'display:none'>,
+            <div class="right flex">
+                <div class="roll_title">先々月のフロントエンド</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_front_two_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @two_month_role_front.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="I今月"  class="category_frame">
+            <div class="right flex">
+                <div class="roll_title">今月のインフラ</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_infra_this_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @this_month_role_infra.each do |t| %>
+                    <div class="table_row">
+                        <%= t.hidden_field :skill_name, value: t.skill %>
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="I先月"  class="category_frame" style = 'display:none'>
+            <div class="right flex">
+                <div class="roll_title">先月のインフラ</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_infra_last_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @last_month_role_infra.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+
+        <div id="I先々月" class="category_frame" style = 'display:none'>,
+            <div class="right flex">
+                <div class="roll_title">先々月のインフラ</div>
+                <%= link_to("項目を追加する", "/learnings/learning_create_infra_two_month", class: "skill_add_btn") %>
+            </div><br>
+            <div class="block skill_form">
+                <div class="table_header">
+                    <p class="table_header_cell skill_name"><%= "項目名" %></p>
+                    <p class="table_header_cell study_time"><%= "学習時間" %></p>
+                </div>
+                <% @two_month_role_infra.each do |t| %>
+                    <div class="table_row">
+                        <div class="table_cell width240 skill_name"><%= t.skill %></div>
+                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
+                    </div>
+                <% end %>
+            </div><br>
+        </div><br>
+    <% end %>
+</div>
+
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.js" type="module">
+</script>

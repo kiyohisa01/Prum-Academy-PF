@@ -1,0 +1,38 @@
+<p>---テストメッセージ------</p>
+<h1>フロントエンド先々月</h1>
+<%= current_user.name %><br>
+<%= current_user.id %><br>
+<p>
+    カテゴリー名の表示：
+    <%= @engineer_role %><br>
+</p>
+<p>
+    対象月の表示：
+    <%= @month %><br>
+</p>
+<p>------------------------</p>
+
+
+<h1><%= @engineer_role %>に項目を追加</h1>
+
+<div class="form"> 
+    <%= form_with(model: @learning) do |f| %>
+        <%= f.hidden_field :role, value: @engineer_role %>
+        <%= f.hidden_field :month, value: @month %>
+        <%= f.hidden_field :year, value: @year %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+
+        <div class="input_form"> 
+            <%= f.label :項目名 %><br>
+            <%= f.text_field :skill %>
+        </div><br>
+
+        <div class="input_form"> 
+            <%= f.label :学習時間 %><br>
+            <%= f.number_field :learning_time, :value => 30 %><br>
+            <label>分単位で入力してください</label><br>
+        </div><br>
+
+        <%= f.submit "追加する", class: "btn" %>
+    <% end %>
+</div>

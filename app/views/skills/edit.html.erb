@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "modal" do %>
+    <div class="modal fade" id="MODAL">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p><%= @updated_skill %>の学習時間を保存しました！</p>
+                </div>
+                <div class="modal-footer">
+                    <%= link_to("編集ページに戻る", "/skill", class: "btn") %>
+                </div>
+            </div> <!-- modal-content -->
+        </div>  <!-- modal-dialog -->
+    </div>  <!-- modal fade -->
+<% end %>
