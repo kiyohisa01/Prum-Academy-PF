@@ -21,6 +21,13 @@ class User < ApplicationRecord
     length: { minimum: 8 }, #最小文字数指定
     allow_blank: true
 
+  # テキストのバリデーション
+  validates :introduce, 
+    presence: true, 
+    length: { maximum: 200 } #最大文字数指定
+    #length: { minimum: 50 } #最小文字数指定
+    
+
   # ActiveStorageとUserを紐付け
   has_one_attached :avatar #画像は1枚まで
 

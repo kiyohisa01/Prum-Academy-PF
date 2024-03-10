@@ -1,22 +1,27 @@
 class UsersController < ApplicationController
 
   def new
+    puts "■■new■■"
   end
 
   def create
+    puts "■■create■■"
     @user = User.new(user_params)
     @user.avatar.attach(params[:user][:avatar])
     if @user.save 
+      puts "■■create_if■■"
       reset_session
       log_in @user
       redirect_to @user
     else
+      puts "■■create_else■■"
       # ▼　保存の失敗
       render 'new', status: :unprocessable_entity
     end
   end
 
   def edit
+    puts "■■edit■■"
     @user = User.find(params[:id])
   end
 
@@ -25,16 +30,20 @@ class UsersController < ApplicationController
   end
 
   def update
+    puts "■■UPDATE■■"
     @user = User.find(params[:id])
     if @user.update(user_params)
+      puts "■■UPDATE_if■■"
       redirect_to user_path
     else
+      puts "■■UPDATE_else■■"
       flash[:alert] = "保存に失敗しました"
-      render "edit"
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def show
+    puts "■■show■■"
     @user = User.find(params[:id])
 
     # 月と年の値を取得
