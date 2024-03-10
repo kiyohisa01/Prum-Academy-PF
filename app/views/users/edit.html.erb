@@ -1,5 +1,8 @@
 <h1>自己紹介を編集する</h1>
 <div class="form"> 
+
+    <%= @user %>
+
     <%= form_with(model: @user) do |f| %>
         <div class="input_form">
             <label>自己紹介文</label><br>

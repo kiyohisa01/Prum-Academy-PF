@@ -279,13 +279,13 @@ select {
 }
 
 
-#avater_image {
+#avatar_image {
   //width: 360px;
   //height:360px;
   border-radius:50%;
   background-position: center;
 }
-#avater_name {
+#avatar_name {
   text-align: center;
   font-size: 20px;
   margin-top: 20px;
@@ -312,6 +312,10 @@ select {
   text-align:  center;
   width: 960px;
   height:582px;
+}
+
+.chart {
+  margin: 0 179.5px;
 }
 
 .chart_title_block {

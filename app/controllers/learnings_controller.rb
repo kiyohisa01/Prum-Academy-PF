@@ -8,17 +8,19 @@ class LearningsController < ApplicationController
     end
 
   def new
+    puts "■■■■new■■■■"
       @learning = Learning.new
   end
 
   def create
+    puts "■■■■create■■■■"
       @learning = Learning.new(learning_params)
       if @learning.save
-          flash[:notice] = "保存に成功しました"
-          redirect_to "learnings"
+        flash[:notice] = "保存に成功しました"
+        redirect_to learnings_url
       else
-          flash[:alert] = "保存に失敗しました"
-          redirect_to @learning
+        flash[:alert] = "保存に失敗しました"
+        redirect_to learnings_url
       end
   end
 
@@ -26,6 +28,11 @@ class LearningsController < ApplicationController
   end
 
   def index
+    puts "■■■■index■■■■"
+    @learning = Learning.find_by(params[:id])
+    @user_id = @learning.id
+    puts @learning
+    puts @user_id
       # ▼　今月の整数を取得
       @this_month= Date.today.month
       @this_year= Date.today.year
@@ -77,6 +84,7 @@ class LearningsController < ApplicationController
   end
 
   def learning_create_back_this_month
+      puts "■■■■learning_create_back_this_month■■■■"
       @learning = Learning.new
       @month = Date.today.month
       @year = Date.today.year
@@ -227,10 +235,12 @@ class LearningsController < ApplicationController
   end
 
   def edit
+      puts "■■■■edit■■■■"
       @learning = Learning.find(params[:id])
   end
 
   def update
+      puts "■■■■update■■■■"
       @learning = Learning.find(params[:id])
       if @learning.update(learning_params)
           @modal = "update"
@@ -243,22 +253,23 @@ class LearningsController < ApplicationController
   end
 
   def destroy
-      learning = Learning.find(params[:id])
-      if learning.user_id == current_user.id
+      puts "■■■■destroy■■■■"
+      @learning = Learning.find(params[:id])
+      if @learning.user_id == current_user.id
           @modal = "delete"
-          @delete_skill = learning.skill
-          learning.destroy
+          @delete_skill = @learning.skill
+          @learning.destroy
           flash[:notice] = "削除しました"
-          redirect_to learning_path
+          redirect_to learning_path, status: :see_other
       else
           flash.now[:danger] = "削除に失敗しました"
-          render 'index'
+          render 'index', status: :see_other
       end
   end
 
   private
   def learning_params
-    params.require(:learning).permit(:learning_time, :user_id, :month, :year, :engineer_role, :skill)
+    params.require(:learning).permit(:learning_time, :month, :year, :engineer_role, :skill)
   end
       
 end

@@ -1,11 +1,10 @@
-
 <div class="profile_page">
   <div class="profile_block">
     <div>
       <%= form_for @user do |i| %>
         <% if @user.avatar.attached? %>
           <div id="avatar_image">
-            <%= image_tag i, :size => "360x360", :style => "border-radius: 50%" %>
+            <%= image_tag @user.avatar, :size => "360x360", :style => "border-radius: 50%" %>
           </div>
         <% else %>
           <div id="avatar_image_nil">
@@ -43,7 +42,7 @@
 
 <br>
 
-<div style="position:relative;width:1081px;height:532px;">
+<div class="chart" style="position:relative;width:1081px;height:532px;">
   <canvas id="myChart"></canvas>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </div>
@@ -71,53 +70,41 @@
           data: [this_month_learnings_back_sum, last_month_learnings_back_sum, two_month_learnings_back_sum],
           backgroundColor: [
               'rgba(255, 99, 132, 0.5)',
-              'rgba(255, 159, 64, 0.5)',
-              'rgba(255, 206, 86, 0.5)'
+              'rgba(255, 99, 132, 0.5)',
+              'rgba(255, 99, 132, 0.5)'
           ],
           borderColor: [
               'rgba(255, 99, 132, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 206, 86, 1)'
+              'rgba(255, 99, 132, 1)',
+              'rgba(255, 99, 132, 1)'
           ],
           borderWidth: 1
         },{
           label: 'フロントエンド',
           data: [this_month_learnings_front_sum, last_month_learnings_front_sum, two_month_learnings_front_sum],
           backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 133, 0, 0.2)',
+              'rgba(255, 133, 0, 0.2)',
+              'rgba(255, 133, 0, 0.2)'
           ],
           borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 150, 90, 1)',
+              'rgba(255, 150, 90, 1)',
+              'rgba(255, 150, 90, 1)'
           ],
           borderWidth: 1
         },{
           label: 'インフラ',
           data: [this_month_learnings_infra_sum, last_month_learnings_infra_sum, two_month_learnings_infra_sum],
           backgroundColor: [
-              'rgba(255, 139, 90, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 166, 90, 0.2)',
+              'rgba(255, 166, 90, 0.2)',
+              'rgba(255, 166, 90, 0.2)'
           ],
           borderColor: [
-              'rgba(255, 139, 90, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 209, 123, 1)',
+              'rgba(255, 209, 123, 1)',
+              'rgba(255, 209, 123, 1)'
           ],
           borderWidth: 1
         }
