@@ -24,7 +24,11 @@
 
 <div class="category_wrapper">
     <%= form_with(model: @learning) do |f| %>
-        <%= f %><br>
+        <%= @two_months %><br>
+        <%= @learning %><br>
+        <%= @learning_skill %><br>
+        <%= @this_month_role_back %><br>
+        
         <%= f.select :month, @two_months, { class: 'select' , required: true, id: "input"}%><br>
 
         <div id="B今月"  class="category_frame">
@@ -40,11 +44,10 @@
                 <% @this_month_role_back.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time, class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
-                        <div class="table_cell width200 center"><%= button_to '削除する', learning_path(@user_id), method: :delete, class: "delete_btn"%></div>
+                        <div class="table_cell width200 center"><%= link_to '削除する', learning_path(t.id), method: :delete, class: "delete_btn", data: { "turbo-method": :delete } %></div>
                     </div>
-                    <%= button_to '削除', learning_path(@user_id), method: :delete, data: { turbo_method: :delete } %>
                 <% end %>
             </div><br>
         </div><br>
@@ -62,7 +65,7 @@
                 <% @last_month_role_back.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time, class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -83,7 +86,7 @@
                 <% @two_month_role_back.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -105,7 +108,7 @@
                     <div class="table_row">
                         <%= t.hidden_field :skill_name, value: t.skill %>
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -126,7 +129,7 @@
                 <% @last_month_role_front.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -147,7 +150,7 @@
                 <% @two_month_role_front.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -169,7 +172,7 @@
                     <div class="table_row">
                         <%= t.hidden_field :skill_name, value: t.skill %>
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -190,7 +193,7 @@
                 <% @last_month_role_infra.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
@@ -211,7 +214,7 @@
                 <% @two_month_role_infra.each do |t| %>
                     <div class="table_row">
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
-                        <div class="table_cell width240"><%= f.number_field :hours, :value => t.learning_time , class: "hours_select" %></div>
+                        <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time , class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
                         <div class="table_cell width200 center"><%= f.submit "削除する", method: :delete, class: "delete_btn" %></div>
                     </div>
