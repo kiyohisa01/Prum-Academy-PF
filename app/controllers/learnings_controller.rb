@@ -29,10 +29,9 @@ class LearningsController < ApplicationController
 
   def index
     puts "■■■■index■■■■"
-    @learning = Learning.find_by(params[:id])
-    @user_id = @learning.id
+    @learning = current_user.learnings.find_by(params[:id])
+    @learning_skill = @learning.skill
     puts @learning
-    puts @user_id
       # ▼　今月の整数を取得
       @this_month= Date.today.month
       @this_year= Date.today.year
@@ -243,12 +242,14 @@ class LearningsController < ApplicationController
       puts "■■■■update■■■■"
       @learning = Learning.find(params[:id])
       if @learning.update(learning_params)
-          @modal = "update"
-          @update_skill = learning.skill_was
-          redirect_to learnings_url
+        puts "■■■■update_if■■■■"
+        @modal = "update"
+        @update_skill = @learning.skill_was
+        redirect_to learnings_url
       else
-          flash[:alert] = "保存に失敗しました"
-          render :new
+        puts "■■■■update_else■■■■"
+        flash[:alert] = "保存に失敗しました"
+        render :new
       end
   end
 
@@ -256,20 +257,22 @@ class LearningsController < ApplicationController
       puts "■■■■destroy■■■■"
       @learning = Learning.find(params[:id])
       if @learning.user_id == current_user.id
+          puts "■■■■destroy_if■■■■"
           @modal = "delete"
           @delete_skill = @learning.skill
           @learning.destroy
           flash[:notice] = "削除しました"
           redirect_to learning_path, status: :see_other
       else
+          puts "■■■■destroy_else■■■■"
           flash.now[:danger] = "削除に失敗しました"
-          render 'index', status: :see_other
+          render :index, status: :see_other
       end
   end
 
   private
   def learning_params
-    params.require(:learning).permit(:learning_time, :month, :year, :engineer_role, :skill)
+    params.require(:learning).permit(:user_id, :learning_time, :month, :year, :engineer_role, :skill)
   end
       
 end

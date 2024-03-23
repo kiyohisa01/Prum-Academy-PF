@@ -16,7 +16,7 @@
 
         <div class="input_form"> 
             <%= f.label :パスワード %><br>
-            <%= f.password_field :password %>
+            <input type="password" name="password" id="password" minlength="8" required />
         </div><br>
 
         <%= f.submit "登録する", class: "btn" %>

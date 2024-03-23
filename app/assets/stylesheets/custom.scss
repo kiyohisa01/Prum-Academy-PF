@@ -444,7 +444,7 @@ border: 1px solid #000000;}
   border-radius: 4px;
   border-bottom: 0;
 }
-.hours_select {
+.minutes_select {
   width: 160px;
   height: 40px;
   border: 1px solid #0000003B;
@@ -478,6 +478,9 @@ border: 1px solid #000000;}
   border-bottom: 0;
   margin-bottom: 0px;
   margin-left: 25px;
+  display: block;
+  padding: 8px;
+  margin-left: 70px;
 }
 
 

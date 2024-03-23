@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   get   "learnings/learning_create_infra_two_month",  to: "learnings#learning_create_infra_two_month"
 
   resources :users
-  resources :skills
   resources :learnings
   
   get 'users/index'
