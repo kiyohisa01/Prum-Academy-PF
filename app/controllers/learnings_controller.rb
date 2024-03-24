@@ -30,7 +30,7 @@ class LearningsController < ApplicationController
   def index
     puts "■■■■index■■■■"
     @learning = current_user.learnings.find_by(params[:id])
-    @learning_skill = @learning.skill
+    @learning_array = Learning.where(id: params[:id])
     puts @learning
       # ▼　今月の整数を取得
       @this_month= Date.today.month
@@ -242,15 +242,18 @@ class LearningsController < ApplicationController
       puts "■■■■update■■■■"
       @learning = Learning.find(params[:id])
       if @learning.update(learning_params)
-        puts "■■■■update_if■■■■"
+        puts "■■■■update>if■■■■"
+        puts @learning
         @modal = "update"
-        @update_skill = @learning.skill_was
+        @update_skill = @learning.skill
+        puts "■■■■update>if>redirect_to■■■■"
         redirect_to learnings_url
       else
-        puts "■■■■update_else■■■■"
+        puts "■■■■update>else■■■■"
         flash[:alert] = "保存に失敗しました"
-        render :new
+        redirect_to learnings_url
       end
+      puts "■■■■update>end■■■■"
   end
 
   def destroy
@@ -266,7 +269,7 @@ class LearningsController < ApplicationController
       else
           puts "■■■■destroy_else■■■■"
           flash.now[:danger] = "削除に失敗しました"
-          render :index, status: :see_other
+          redirect_to learning_path, status: :see_other
       end
   end
 

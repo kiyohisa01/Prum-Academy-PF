@@ -24,10 +24,22 @@
 
 <div class="category_wrapper">
     <%= form_with(model: @learning) do |f| %>
-        <%= @two_months %><br>
-        <%= @learning %><br>
-        <%= @learning_skill %><br>
-        <%= @this_month_role_back %><br>
+        <p>@learning</p><%= @learning %><br>
+        <p>----------------------</p>
+        <p>f</p><%= @learning %><br>
+        <p>----------------------</p>
+        <p>@two_months</p><%= @two_months %><br>
+        <p>----------------------</p>
+        <p>@learning_array</p><%= @learning_array %><br>
+        <p>----------------------</p>
+        <p>@learning_array.each</p>
+        <% @learning_array.each do |i| %>
+            <%= i.skill %><br>
+            <p>----------------------</p>
+        <% end %><br>
+        <p>----------------------</p>
+        <p>@this_month_role_back</p><%= @this_month_role_back %><br>
+        <p>----------------------</p>
         
         <%= f.select :month, @two_months, { class: 'select' , required: true, id: "input"}%><br>
 
@@ -46,6 +58,7 @@
                         <div class="table_cell width240 skill_name"><%= t.skill %></div>
                         <div class="table_cell width240"><%= f.number_field :learning_time, :value => t.learning_time, class: "minutes_select" %></div>
                         <div class="table_cell width200 center"><%= f.submit "学習時間を保存する", class: "save_btn" %></div>
+                        <div class="table_cell width200 center"><%= link_to '学習時間を保存する', learning_path(t.id), method: :put, class: "save_btn", data: { "turbo-method": :put } %></div>
                         <div class="table_cell width200 center"><%= link_to '削除する', learning_path(t.id), method: :delete, class: "delete_btn", data: { "turbo-method": :delete } %></div>
                     </div>
                 <% end %>
